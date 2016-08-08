@@ -16,3 +16,9 @@ mod 'golang',
 mod 'wget',
   :git    => 'https://github.com/maestrodev/puppet-wget.git',
   :branch => 'master'
+mod 'profile',
+  :git    => 'https://github.com/MattWatson-/profile.git',
+  :branch => 'master'
+mod 'role',
+  :git    => 'https://github.com/MattWatson-/role.git',
+  :branch => 'master'
