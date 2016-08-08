@@ -10,12 +10,6 @@ mod 'apt',
 mod 'concat',
   :git    => 'https://github.com/puppetlabs/puppetlabs-concat.git',
   :branch => 'master'
-mod 'golang',
-  :git    => 'https://github.com/scotty-c/puppet-golang.git',
-  :branch => 'master'
-mod 'wget',
-  :git    => 'https://github.com/maestrodev/puppet-wget.git',
-  :branch => 'master'
 mod 'profile',
   :git    => 'https://github.com/MattWatson-/profile.git',
   :branch => 'master'
