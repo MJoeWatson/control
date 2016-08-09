@@ -1,0 +1,10 @@
+common::files:
+  '/root/gocode':
+    ensure: directory
+  '/root/gocode/src':
+    ensure: directory
+  '/root/gocode/src/basic':
+    ensure: directory
+  '/root/gocode/src/basic/hello.go':
+    ensure: present
+    source: 'puppet:///modules/profile/golang/hello.go'
