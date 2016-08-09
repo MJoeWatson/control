@@ -14,6 +14,3 @@ nginx::nginx_upstreams:
     ensure: 'present'
     members:
       - 'appserver1:8484'
-      - 'appserver2:8484'
-
-nginx::service_ensure: 'stopped'
