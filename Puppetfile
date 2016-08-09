@@ -16,3 +16,6 @@ mod 'profile',
 mod 'role',
   :git    => 'https://github.com/MattWatson-/role.git',
   :branch => 'master'
+mod 'common',
+  :git    => 'https://github.com/MattWatson-/common.git',
+  :branch => 'master'
