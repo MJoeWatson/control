@@ -2,3 +2,4 @@
 consul_template::version: '0.15.0'
 consul_template::user:    'root'
 consul_template::group:   'root'
+consul_template::service_ensure: 'running'
