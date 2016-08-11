@@ -12,11 +12,11 @@ common::files:
     source: 'puppet:///modules/profile/golang/hello.go'
 
 # Install consul as an agent
-  consul::config_hash:
-    data_dir: '/opt/consul'
-    client_addr: '0.0.0.0'
-    bind_addr: "%{::ipaddress_eth0}"
-    disable_update_check: true
+consul::config_hash:
+  data_dir: '/opt/consul'
+  client_addr: '0.0.0.0'
+  bind_addr: "%{::ipaddress_eth0}"
+  disable_update_check: true
 
 # Consul health check for appserver response
 consul::services:
