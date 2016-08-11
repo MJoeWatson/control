@@ -64,7 +64,7 @@ consul::services:
        timeout: '1s'
 
 # Consul Template - Dynamic Nginx load balancing dependent on the health of appserver instance
-consul_template::watches:
+consul_templates::watches:
   appserver:
     template: 'profile/nginx/nginx-lb.ctmpl.erb'
     template_vars:
