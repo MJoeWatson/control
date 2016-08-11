@@ -1,17 +1,73 @@
 ---
-nginx::nginx_vhosts:
-  'appserver':
-    proxy: 'http://appserver'
-    listen_port: 8484
-
+# Host entries used by Nginx
 nginx_hosts:
   appserver:
     host: appserver
     ensure: present
 
-nginx::nginx_upstreams:
+# Nginx VHosts
+nginx::nginx_vhosts:
   'appserver':
-    ensure: 'present'
-    members:
-      - 'appserver1:8484'
-      - 'appserver2:8484'
+    proxy: 'http://appserver'
+    listen_port: 80
+  'nginx':
+    use_default_location: false
+    listen_port: '8080'
+    access_log: 'off'
+    error_log: 'off'
+
+# Nginx health stub to check against
+nginx::nginx_locations:
+  nginx:
+    location: '/nginx_status'
+    vhost: nginx
+    stub_status: true
+    location_cfg_append:
+      access_log: 'off'
+      allow: '127.0.0.1'
+      deny: 'all'
+
+# nginx::nginx_upstreams:
+#   'appserver':
+#     ensure: 'present'
+#     members:
+#       - 'appserver1:8484'
+#       - 'appserver2:8484'
+
+# Install consul as a server
+consul::config_hash:
+  server: true
+  bootstrap_expect: 1
+  advertise_addr: "%{ipaddress_eth0}"
+  client_addr: '0.0.0.0'
+  data_dir: '/opt/consul'
+  log_level: 'INFO'
+  disable_update_check: true
+
+# Consul health check for all services - nginx and consul template
+consul::services:
+  'nginx':
+    checks:
+     - id: "nginx-healthcheck"
+       name: "Healthcheck for service nginx"
+       service_id: "nginx"
+       http: "http://localhost:8080/nginx_status"
+       interval: '10s'
+       timeout: '1s'
+  'consul-template':
+    checks:
+     - id: "consul-template-healthcheck"
+       name: "Healthcheck for service consul-template in %{::env}"
+       service_id: "consul-template"
+       script: "service consul-template status"
+       interval: '10s'
+       timeout: '1s'
+
+# Consul Template - Dynamic Nginx load balancing dependent on the health of appserver instance
+consul_template::watches:
+  appserver:
+    template: 'profile/nginx/nginx-lb.ctmpl.erb'
+    template_vars:
+      service: "appserver"
+    destination: '/etc/nginx/conf.d/appserver.conf'
+    command: 'service nginx reload'

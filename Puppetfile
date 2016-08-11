@@ -19,3 +19,9 @@ mod 'role',
 mod 'common',
   :git    => 'https://github.com/MattWatson-/common.git',
   :branch => 'master'
+mod 'consul',
+  :git    => 'https://github.com/solarkennedy/puppet-consul.git',
+  :tag => 'v1.0.10'
+mod 'consul_template',
+  :git    => 'https://github.com/gdhbashton/puppet-consul_template.git',
+  :branch => 'master'

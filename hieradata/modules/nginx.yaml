@@ -1,3 +1,4 @@
+---
 nginx::manage_repo: 'false'
 nginx::package_name: 'nginx-1.10.1'
 nginx::names_hash_bucket_size: '128'
