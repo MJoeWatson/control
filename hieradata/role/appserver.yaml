@@ -1,3 +1,5 @@
+---
+# Creating GO directory structure
 common::files:
   '/root/gocode':
     ensure: directory
@@ -8,3 +10,21 @@ common::files:
   '/root/gocode/src/basic/hello.go':
     ensure: present
     source: 'puppet:///modules/profile/golang/hello.go'
+
+# Install consul as an agent
+  consul::config_hash:
+    data_dir: '/opt/consul'
+    client_addr: '0.0.0.0'
+    bind_addr: "%{::ipaddress_eth0}"
+    disable_update_check: true
+
+# Consul health check for appserver response
+consul::services:
+  'appserver':
+    checks:
+     - id: "appserver-healthcheck"
+       name: "Healthcheck for service appserver"
+       service_id: "appserver"
+       http: "http://localhost:8484"
+       interval: '10s'
+       timeout: '1s'
