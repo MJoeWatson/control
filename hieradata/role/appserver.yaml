@@ -21,6 +21,7 @@ consul::config_hash:
 # Consul health check for appserver response
 consul::services:
   'appserver':
+    port: 8484
     checks:
      - id: "appserver-healthcheck"
        name: "Healthcheck for service appserver"
