@@ -27,13 +27,6 @@ nginx::nginx_locations:
       allow: '127.0.0.1'
       deny: 'all'
 
-# nginx::nginx_upstreams:
-#   'appserver':
-#     ensure: 'present'
-#     members:
-#       - 'appserver1:8484'
-#       - 'appserver2:8484'
-
 # Install consul as a server
 consul::config_hash:
   server: true
