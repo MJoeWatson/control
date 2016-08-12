@@ -1,6 +1,6 @@
 mod 'nginx',
   :git    => 'https://github.com/jfryman/puppet-nginx.git',
-  :branch => 'master'
+  :tag    => 'v0.3.0'
 mod 'stdlib',
   :git    => 'https://github.com/puppetlabs/puppetlabs-stdlib.git',
   :branch => 'master'
